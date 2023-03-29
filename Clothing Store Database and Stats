@@ -1,0 +1,30 @@
+-- Create a clothing store database 
+
+CREATE TABLE clothing (id INTEGER PRIMARY KEY, item TEXT, color TEXT, size TEXT, price INTEGER);
+
+INSERT INTO clothing VALUES
+(1, "Shirt", "Blue", "S", 10),
+(2, "Shirt", "Blue", "M", 10),
+(3, "Shirt", "Blue", "L", 10),
+(4, "Shorts", "Black", "S", 15),
+(5, "Shorts", "Black", "M", 15),
+(6, "Shorts", "Black", "L", 15),
+(7, "Pants", "Brown", "S", 20),
+(8, "Pants", "Brown", "M", 20),
+(9, "Pants", "Brown", "L", 20),
+(10, "Hoodie", "Gray", "S", 25),
+(11, "Hoodie", "Gray", "M", 25),
+(12, "Hoodie", "Gray", "L", 25),
+(13, "Hat", "White", "S", 30),
+(14, "Hat", "White", "M", 30),
+(15, "Hat", "White", "L", 30)
+;
+
+-- Display the database ordered by price
+SELECT * FROM clothing
+ORDER BY price;
+
+-- Display the clothing items in the store that have a price higher than $15, order the items by price in descending order
+SELECT * FROM clothing
+WHERE price > 15
+ORDER BY price desc;
