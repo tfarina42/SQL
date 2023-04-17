@@ -1,0 +1,63 @@
+-- Create a database of NBA players with their names and ages
+
+CREATE TABLE nba_players (
+    id INTEGER PRIMARY KEY,
+    fullname TEXT,
+    age INTEGER);
+    
+INSERT INTO nba_players (fullname, age) VALUES ("Lebron James" , "38");
+INSERT INTO nba_players (fullname, age) VALUES ("James Harden" , "33");
+INSERT INTO nba_players (fullname, age) VALUES ("Stephen Curry" , "35");   
+INSERT INTO nba_players (fullname, age) VALUES ("Kevin Durant" , "34");  
+INSERT INTO nba_players (fullname, age) VALUES ("Jayson Tatum" , "25");
+INSERT INTO nba_players (fullname, age) VALUES ("Anthony Davis" , "30");
+INSERT INTO nba_players (fullname, age) VALUES ("Joel Embiid" , "29");
+INSERT INTO nba_players (fullname, age) VALUES ("Klay Thompson" , "33");
+INSERT INTO nba_players (fullname, age) VALUES ("Devin Booker" , "26");
+INSERT INTO nba_players (fullname, age) VALUES ("Jaylen Brown" , "26");
+
+
+-- Create a database that stores the player's id and name of the team that they play for
+
+CREATE TABLE team (
+    id INTEGER PRIMARY KEY,
+    player_id INTEGER,
+    name TEXT);
+    
+INSERT INTO team (player_id, name) VALUES (1, "Los Angeles Lakers");
+INSERT INTO team (player_id, name) VALUES (2, "Philadelphia 76ers");
+INSERT INTO team (player_id, name) VALUES (3, "Golden State Warriors");
+INSERT INTO team (player_id, name) VALUES (4, "Phoenix Suns");
+INSERT INTO team (player_id, name) VALUES (5, "Boston Celtics");
+INSERT INTO team (player_id, name) VALUES (6, "Los Angeles Lakers");
+INSERT INTO team (player_id, name) VALUES (7, "Philadelphia 76ers");
+INSERT INTO team (player_id, name) VALUES (8, "Golden State Warriors");
+INSERT INTO team (player_id, name) VALUES (9, "Phoenix Suns");
+INSERT INTO team (player_id, name) VALUES (10, "Boston Celtics");
+
+-- Create a database that matches the players up who play for the same team (teammates)
+
+CREATE TABLE teammates (
+    id INTEGER PRIMARY KEY,
+    player1_id INTEGER,
+    player2_id INTEGER);
+    
+INSERT INTO teammates (player1_id, player2_id) VALUES (1,6);
+INSERT INTO teammates (player1_id, player2_id) VALUES (2,7);
+INSERT INTO teammates (player1_id, player2_id) VALUES (3,8);
+INSERT INTO teammates (player1_id, player2_id) VALUES (4,9);
+INSERT INTO teammates (player1_id, player2_id) VALUES (5,10);
+
+-- Displays the names of each player with the team that they play for
+SELECT nba_players.fullname AS "Name", team.name AS "Team Name"
+FROM nba_players
+JOIN team
+ON nba_players.id = team.player_id;
+
+-- Displays the name of each player and their respective teammate from the data
+SELECT a.fullname AS "Teammate 1", b.fullname AS "Teammate 2"
+FROM teammates
+JOIN nba_players a
+ON teammates.player1_id = a.id
+JOIN nba_players b
+ON teammates.player2_id = b.id;
