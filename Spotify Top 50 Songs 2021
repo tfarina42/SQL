@@ -60,10 +60,11 @@ FROM BIT_DB.Spotifydata;
 
 #6 Select all the artists that had an average popularity score greater than 90 per song. 
 
-SELECT artist_name, avg(popularity)
+SELECT artist_name, avg(popularity) AS avg_popularity
 FROM BIT_DB.Spotifydata
 GROUP BY artist_name
-HAVING avg(popularity)>90;
+HAVING avg_popularity >90
+ORDER BY avg_popularity desc;
 
 #7 Select all tracks that have a danceability score greater than 0.7, speechiness greater than 0.05, and tempo greater than 100.
 
