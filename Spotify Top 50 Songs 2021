@@ -76,10 +76,9 @@ AND tempo >100;
 
 #8 What is the average liveness score for the 10 most popular songs? 
 
-SELECT avg(liveness)
-FROM BIT_DB.Spotifydata
-WHERE popularity
-IN (SELECT popularity
-    FROM BIT_DB.Spotifydata
-    ORDER BY popularity desc
-    LIMIT 10);
+WITH mostpopular AS (SELECT popularity, liveness
+                     FROM Spotifydata
+                     ORDER BY popularity desc
+                     LIMIT 10)
+              
+SELECT avg(liveness) FROM mostpopular;
