@@ -38,8 +38,7 @@ LIMIT 1;
 
 SELECT track_name, popularity
 FROM BIT_DB.Spotifydata
-GROUP BY track_name
-ORDER BY popularity desc;
+WHERE popularity IN (SELECT max(popularity) FROM BIT_DB.Spotifydata);
 
 #3 Which artist(s) has the most songs featured in the Spotify Top 50?
 
