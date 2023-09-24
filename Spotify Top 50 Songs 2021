@@ -55,11 +55,8 @@ WHERE artist_name = 'Bad Bunny';
 
 #5 What artist released the shortest track? 
 
-SELECT artist_name, track_name, duration_ms
-FROM BIT_DB.Spotifydata
-GROUP BY artist_name, track_name
-ORDER BY duration_ms asc
-LIMIT 1;
+SELECT artist_name, track_name, min(duration_ms)
+FROM BIT_DB.Spotifydata;
 
 #6 Select all the artists that had an average popularity score greater than 90 per song. 
 
