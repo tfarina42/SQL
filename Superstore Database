@@ -58,4 +58,4 @@ ORDER BY AVG(price) desc;
 #7 Show how many SMART LED Tvs are in stock. 
 SELECT stock_quantity
 FROM superstore
-WHERE item_name = 'Smart LED TV';
+WHERE item_name = "Smart LED TV";
