@@ -42,10 +42,13 @@ WHERE popularity IN (SELECT max(popularity) FROM BIT_DB.Spotifydata);
 
 #3 Which artist(s) has the most songs featured in the Spotify Top 50?
 
-SELECT artist_name, count(artist_name)
-FROM BIT_DB.Spotifydata
+SELECT artist_name, COUNT(artist_name) AS "Number of Songs"
+FROM Spotifydata  
 GROUP BY artist_name
-ORDER BY count(artist_name) desc;
+HAVING COUNT(artist_name)=(SELECT MAX(name_count) 
+                            FROM (SELECT artist_name, COUNT(artist_name) AS name_count
+                                  FROM Spotifydata 
+                                  GROUP BY artist_name));
 
 #4 Select the track names of all the songs by the artist "Bad Bunny".
 
