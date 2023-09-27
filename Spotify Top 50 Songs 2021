@@ -47,11 +47,11 @@ FROM BIT_DB.Spotifydata
 GROUP BY artist_name
 ORDER BY count(artist_name) desc;
 
-#4 Select the track names of all the songs by the artist 'Bad Bunny.'
+#4 Select the track names of all the songs by the artist "Bad Bunny".
 
 SELECT track_name
 FROM BIT_DB.Spotifydata
-WHERE artist_name = 'Bad Bunny';
+WHERE artist_name = "Bad Bunny";
 
 #5 What artist released the shortest track? 
 
