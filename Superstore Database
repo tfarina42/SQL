@@ -25,35 +25,35 @@ VALUES
     (14, 'Cutlery Set', 'Kitchen Supplies', 34.50, 40, 4.4),
     (15, 'Cozy Throw Blanket', 'Furnishings', 24.99, 100, 4.2);
 
-#Use a SELECT statement to order the items by price.
+#1 Use a SELECT statement to order the items by price.
 SELECT item_name, price
 FROM superstore
 ORDER BY price desc;
 
-#Show the MAX price of all of the items.
+#2 Show the MAX price of all of the items.
 SELECT MAX(price) 
 FROM superstore;
 
-#Show the MIN price of all of the items.
+#3 Show the MIN price of all of the items.
 SELECT MIN(price)
 FROM superstore;
 
-#Show the average price of all of the items.
+#4 Show the average price of all of the items.
 SELECT AVG(price) 
 FROM superstore;
 
-#Show the max price of the items from the category "Kitchen Supplies".
+#5 Show the max price of the items from the category "Kitchen Supplies".
 SELECT MAX(price)
 FROM superstore
-WHERE category = 'Kitchen Supplies';
+WHERE category = "Kitchen Supplies";
 
-#Order the categories based on the average price per category in descending order.
+#6 Order the categories based on the average price per category in descending order.
 SELECT AVG(price), category
 FROM superstore
 GROUP BY category
 ORDER BY AVG(price) desc;
 
-#Show how many SMART LED Tvs are in stock. 
-SELECT item_name, stock_quantity
+#7 Show how many SMART LED Tvs are in stock. 
+SELECT stock_quantity
 FROM superstore
 WHERE item_name = 'Smart LED TV';
