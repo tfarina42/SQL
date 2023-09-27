@@ -87,7 +87,7 @@ LEFT JOIN "netflix_people" people
 ON titles.show_id = people.show_id
 WHERE titles.title = 'Bright Star';
 
-#5. What is the oldest movie in the database and what year was it made?
+#5a. What is the oldest movie in the database and what year was it made?
 
 SELECT title, release_year
 FROM "netflix_titles_info"
@@ -95,7 +95,7 @@ WHERE type = 'Movie'
 ORDER BY release_year asc
 LIMIT 1;
 
-#5. What is the oldest movie in the database and what year was it made? (Another way to answer the question more specifically using a subquery)
+#5b. What is the oldest movie in the database and what year was it made? (Another way to answer the question more specifically using a subquery)
 
 SELECT title, release_year
 FROM "netflix_titles_info"
