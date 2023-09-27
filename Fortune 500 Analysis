@@ -1,3 +1,5 @@
+#This analysis is completed based on the Fortune 500 dataset below:
+
 CREATE TABLE fortune_companies (
     company_id INTEGER PRIMARY KEY,
     company_name TEXT,
@@ -55,3 +57,74 @@ VALUES
     ('Company II', 'Telecommunications', 110.5, 2000, 1, 21, 12, 4.9),
     ('Company JJ', 'Manufacturing', 370.0, 3100, 1, 20, 12, 7.6),
     ('Company KK', 'Healthcare', 150.2, 3400, 0, 16, 8, 5.3);
+
+#SQL is used to further analyze the data and answer the following questions:
+
+#1 Assign each company as having "Excellent", "Fair", or "Poor" work life balance based on the number of paid time off days. 
+
+SELECT company_name, paid_time_off_days,
+CASE WHEN paid_time_off_days >= 20 THEN "Excellent"
+     WHEN paid_time_off_days >= 15 THEN "Fair"
+     ELSE "Poor"
+END AS "Work Life Balance"
+FROM fortune_companies
+ORDER BY paid_time_off_days asc;
+
+#2 Categorize each company as "Large", "Mid-sized", or "Small" based on the number of employees they have.
+
+SELECT company_name, employees, 
+CASE WHEN employees >= 100000 THEN "Large"
+     WHEN employees >= 2000 THEN "Mid-Sized"
+     ELSE "Small"
+END AS company_size
+FROM fortune_companies
+ORDER BY employees desc;
+
+#3 Which industries have a total revenue greater than $1500 billion and what are their total revenues?
+
+SELECT industry, round(sum(revenue),2) AS "Total Revenue (Billions)"
+FROM fortune_companies 
+GROUP BY industry 
+HAVING "Total Revenue (Billions)" > 1500;
+
+#4 Which company in the healthcare industry has the most employees?
+
+SELECT company_name, max(employees) 
+FROM fortune_companies
+WHERE industry = "Healthcare";
+
+#5 Which companies have the smallest number of maternity leave weeks? (Should be more than one company)
+
+SELECT company_name, maternity_leave_weeks
+FROM fortune_companies
+WHERE maternity_leave_weeks IN (SELECT min(maternity_leave_weeks) 
+                                FROM fortune_companies);
+
+#6 Show the number of companies within each industry.
+
+SELECT industry, count(company_id) AS "Number of Companies"
+FROM fortune_companies
+GROUP BY industry;
+
+#7 Which industry has the highest average employee tenure per company? 
+
+SELECT industry, round(avg(avg_employee_tenure),2) AS "Average Employee Tenure"
+FROM fortune_companies
+GROUP BY industry
+ORDER BY "Average Employee Tenure" desc
+LIMIT 1;
+
+#8 Show all the companies that fall in the technology OR the energy industry.
+
+SELECT *
+FROM fortune_companies 
+WHERE industry = "Technology"
+OR industry = "Energy"
+ORDER BY industry;
+
+#9 Show all the companies that provide healthcare benefits AND have greater than 20 paid time off days. 
+
+SELECT *
+FROM fortune_companies
+WHERE healthcare_benefits = 1 
+AND paid_time_off_days > 20;
