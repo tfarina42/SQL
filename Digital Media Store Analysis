@@ -51,17 +51,41 @@ ON e.EmployeeId = c.SupportRepId
 JOIN chinook.invoices i
 ON c.CustomerId = i.CustomerId;
 
-#8 How many invoices were there in 2009?
+#8a How many invoices were there in 2009?
 
 SELECT count(*) 
 FROM chinook.invoices
 WHERE InvoiceDate LIKE "2009%";
 
-#9 What are the total sales for 2009?
+#8b How many invoices were there each year?
+
+SELECT count(InvoiceId) AS "Number of Invoices",
+    CASE WHEN InvoiceDate LIKE "2009%" THEN "2009"
+         WHEN InvoiceDate LIKE "2010%" THEN "2010"
+         WHEN InvoiceDate LIKE "2011%" THEN "2011"
+         WHEN InvoiceDate LIKE "2012%" THEN "2012"
+         WHEN InvoiceDate LIKE "2013%" THEN "2013"
+    END AS Year
+FROM chinook.invoices 
+GROUP BY Year;
+
+#9a What are the total sales for 2009?
 
 SELECT ROUND(SUM(total),2) AS "Total Sales"
 FROM chinook.invoices
 WHERE InvoiceDate LIKE "2009%";
+
+#9b What are the total sales each year? 
+
+SELECT ROUND(SUM(total),2) AS "Total Sales",
+    CASE WHEN InvoiceDate LIKE "2009%" THEN "2009"
+         WHEN InvoiceDate LIKE "2010%" THEN "2010"
+         WHEN InvoiceDate LIKE "2011%" THEN "2011"
+         WHEN InvoiceDate LIKE "2012%" THEN "2012"
+         WHEN InvoiceDate LIKE "2013%" THEN "2013"
+    END AS Year
+FROM chinook.invoices
+GROUP BY Year;
 
 #10 Write a query that includes the purchased track name with each invoice line ID.
 
